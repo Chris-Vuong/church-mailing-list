@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - Church Management</title>
+        {% else %}
+        <title>Welcome to Church APP</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>ChurchAPP: <a href="/index">Home</a></div>
+        {% block content %}{% endblock %}
+    </body>
+</html>
