@@ -1,17 +1,8 @@
 from flask import render_template, flash, redirect, Flask, request
 from app import app
+from app.sql_to_html import sqlQuery
 from app.forms import EmailContactForm
-from flask_mysqldb import MySQL
 import os
-
-
-# app.config['MYSQL_HOST'] = os.getenv('host'),
-# app.config['MYSQL_USER'] = os.getenv('user'),
-# app.config['MYSQL_PASSWORD'] = os.getenv('password'),
-# app.config['MYSQL_DB'] = os.getenv('database'),
-
-# mysql= MySQL(app)
-
 
 @app.route('/')
 @app.route('/index')
@@ -19,6 +10,12 @@ def index():
     '''Home page'''
     user = {'username': 'Chris'}
     return render_template('index.html', title='Home', user=user)
+
+@app.route('/table')
+def query():
+    '''Test Query'''
+    query = sqlQuery()
+    return render_template('table.html', title='Test Query', headings=query[0], data=query[1])
 
 
 @app.route('/emailsignup', methods=['GET', 'POST'])
