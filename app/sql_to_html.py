@@ -34,5 +34,3 @@ def sqlQuery():
         QUERY = "SELECT FirstName, LastName, Email FROM contacts"
         data = tuple(pd.read_sql_query(QUERY, cnx).itertuples(index=False))
         return (headings, data)
-
-sqlQuery()
