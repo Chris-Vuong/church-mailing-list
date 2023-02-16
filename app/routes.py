@@ -17,21 +17,23 @@ def query():
     query = sqlQuery()
     return render_template('table.html', title='Test Query', headings=query[0], data=query[1])
 
+@app.route('/success')
+def success():
+    return render_template('success.html', title='Success Page')
+
 
 @app.route('/emailsignup', methods=['GET', 'POST'])
 def emailSignup():
     '''Email Signup page: Work in progress'''
     form = EmailContactForm()
     if form.validate_on_submit():
-            first_name = request.form['first_name']
-            last_name = request.form['last_name']
-            email = request.form['email']
-            cursor = mysql.connection.cursor()
-            cursor.execute(''' INSERT INTO contacts VALUES (FirstName, LastName, Email) ''',
-            (first_name, last_name, email))
-            flash('Signup for {first_name}'.format(
-                form.email.data
-            ))
+            # first_name = request.form['first_name']
+            # last_name = request.form['last_name']
+            # email = request.form['email']
+            # cursor = mysql.connection.cursor()
+            # cursor.execute(''' INSERT INTO contacts VALUES (FirstName, LastName, Email) ''',
+            # (first_name, last_name, email))
+            flash(f'Email signup successful for {form.first_name.data}', 'success')
             return redirect('/success') # TODO: redirect to signup success
     return render_template(
         'emailsignup.html', 
